@@ -666,27 +666,52 @@
     </footer>
 
     <script>
-        const track = document.getElementById('carouselTrack');
-        let isHovered = false;
-        let scrollSpeed = 3; 
+    const track = document.getElementById('carouselTrack');
+    const cards = document.querySelectorAll('.tool-card');
+    
+    let isHovered = false;
+    let isInteracting = false; // Nowa zmienna: blokuje płynięcie po kliknięciu
+    let scrollSpeed = 2; 
 
-        function autoScroll() {
-            if (!isHovered) {
-                track.scrollLeft += scrollSpeed;
-                
-                const halfWidth = track.scrollWidth / 2;
-                if (track.scrollLeft >= halfWidth) {
-                    track.scrollLeft = 0;
-                }
+    // Automatyczne przewijanie
+    function autoScroll() {
+        if (!isHovered && !isInteracting) {
+            track.scrollLeft += scrollSpeed;
+            
+            const halfWidth = track.scrollWidth / 2;
+            if (track.scrollLeft >= halfWidth) {
+                track.scrollLeft = 0;
             }
-            requestAnimationFrame(autoScroll);
         }
+        requestAnimationFrame(autoScroll);
+    }
 
-        track.addEventListener('mouseenter', () => { isHovered = true; });
-        track.addEventListener('mouseleave', () => { isHovered = false; });
+    // Centrowanie karty po kliknięciu
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            isInteracting = true; // Zatrzymaj ruch po kliknięciu
+            
+            card.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest',
+                inline: 'center' // Wycentruj w poziomie
+            });
+        });
+    });
 
-        autoScroll();
-    </script>
+    // Wstrzymanie ruchu po najechaniu myszką
+    track.addEventListener('mouseenter', () => { isHovered = true; });
+    track.addEventListener('mouseleave', () => { isHovered = false; });
+
+    // Wznowienie autoscrolla po kliknięciu w tło poza kartami
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.tool-card')) {
+            isInteracting = false;
+        }
+    });
+
+    autoScroll();
+</script>
 
 </body>
 </html>
