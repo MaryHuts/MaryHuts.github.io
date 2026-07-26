@@ -373,6 +373,42 @@
             box-shadow: 0 6px 20px rgba(236, 72, 153, 0.5);
         }
 
+        /* Opis pod przyciskami w kartach SaaS */
+        .saas-info-box {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .saas-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .saas-info-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .saas-info-item h4 {
+            font-size: 0.95rem;
+            color: var(--accent-cyan);
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .saas-info-item p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
         @media (max-width: 850px) {
             .game-item, .game-item:nth-child(even) {
                 flex-direction: column;
@@ -415,7 +451,7 @@
     </div>
 
     <div class="hint-badge-wrapper">
-        <div class="hint-badge">💡 Hover over any card to pause & test the app</div>
+        <div class="hint-badge">Hover over any card to pause & test the app</div>
     </div>
 
     <!-- AI SHOWCASE CAROUSEL SECTION -->
@@ -450,7 +486,7 @@
     <!-- 🎮 MOBILE PLAYGROUND SECTION -->
     <section class="games-section">
         <div class="section-title">
-            <h2>🎮 Mobile Playground</h2>
+            <h2>Mobile Playground</h2>
             <p>Test mobile web games live inside the smartphone frame or download to your Android device.</p>
         </div>
 
@@ -466,10 +502,10 @@
                     <p>Relaxing virtual aquarium experience. Care for exotic pets, style your underwater habitat, and enjoy soothing mini-games.</p>
                     <div class="btn-group">
                         <a href="https://aqua-pet-paradise.lovable.app" target="_blank" class="btn btn-web">
-                            🌐 Zagraj w przeglądarce
+                            Play in your browser
                         </a>
                         <a href="https://play.google.com" target="_blank" class="btn btn-playstore">
-                            🤖 Pobierz z Google Play
+                            Download from Google Play
                         </a>
                     </div>
                 </div>
@@ -485,10 +521,10 @@
                     <p>Sci-fi tactical space saga. Command your starship, explore unknown galaxies, and discover ancient alien artifacts.</p>
                     <div class="btn-group">
                         <a href="https://stellar-artifact-saga.lovable.app" target="_blank" class="btn btn-web">
-                            🌐 Zagraj w przeglądarce
+                            Play in your browser
                         </a>
                         <a href="https://play.google.com" target="_blank" class="btn btn-playstore">
-                            🤖 Pobierz z Google Play
+                            Download from Google Play
                         </a>
                     </div>
                 </div>
@@ -504,10 +540,10 @@
                     <p>Engaging fleet management and logistics simulator. Optimize routes, manage working hours, and master transport logistics.</p>
                     <div class="btn-group">
                         <a href="https://tachomaster-plan.lovable.app" target="_blank" class="btn btn-web">
-                            🌐 Zagraj w przeglądarce
+                            Play in your browser
                         </a>
                         <a href="https://play.google.com" target="_blank" class="btn btn-playstore">
-                            🤖 Pobierz z Google Play
+                            Download from Google Play
                         </a>
                     </div>
                 </div>
@@ -519,7 +555,7 @@
     <!-- 💼 SAAS & B2B SOLUTIONS SECTION (NOWA SEKCJA PONIŻEJ GIER) -->
     <section class="saas-section">
         <div class="section-title">
-            <h2>💼 B2B SaaS Ecosystems</h2>
+            <h2>B2B SaaS Ecosystems</h2>
             <p>Dual-app loyalty solutions for Cafes and Bubble Tea shops (Customer Web App + Barista Scanner Terminal).</p>
         </div>
 
@@ -535,31 +571,48 @@
                     <div class="phone-frame saas-phone">
                         <iframe src="https://customer-demo-cafe.lovable.app" title="Coffee Go Customer App"></iframe>
                     </div>
-                    <div class="phone-label">📱 Customer Web App</div>
+                    <div class="phone-label">Customer Web App</div>
                 </div>
 
                 <div>
                     <div class="phone-frame saas-phone">
                         <iframe src="https://barista-demo-tool.lovable.app" title="Coffee Go Barista Scanner"></iframe>
                     </div>
-                    <div class="phone-label">☕ Barista Terminal</div>
+                    <div class="phone-label">Barista Terminal</div>
                 </div>
             </div>
 
             <div class="b2b-actions">
                 <a href="https://customer-demo-cafe.lovable.app" target="_blank" class="btn btn-orange">
-                    📱 Wypróbuj Demo Klienta
+                    Try the Client Demo
                 </a>
                 <a href="https://barista-demo-tool.lovable.app" target="_blank" class="btn btn-orange">
-                    ☕ Wypróbuj Demo Baristy
+                    Try the Barista Demo
                 </a>
             </div>
+            <div class="saas-info-box">
+                <div class="saas-info-grid">
+                    <div class="saas-info-item">
+                        <h4>Digital Stamp Card</h4>
+                        <p>Customers earn points directly in their phone's browser—without having to install dedicated apps from the app store.</p>
+                    </div>
+                    <div class="saas-info-item">
+                        <h4>Instant QR Scanner</h4>
+                        <p>The barista scans the code from the customer's screen in a fraction of a second, automatically adding stamps or issuing rewards.</p>
+                    </div>
+                    <div class="saas-info-item">
+                        <h4>Analytics & Menu</h4>
+                        <p>An interactive menu for guests and a preview of traffic statistics and the most popular meal combinations for the owner.</p>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- Koniec karty Coffee Go -->
         </div>
 
         <!-- SaaS Item 2: Neko Bubble Tea -->
         <div class="saas-card">
             <div class="saas-header">
-                <h3>🧋 Neko Bubble Tea — Kawaii Loyalty & Order App</h3>
+                <h3>Neko Bubble Tea — Kawaii Loyalty & Order App</h3>
                 <p>Full experience with Paw Stamp Cards, QR Generator, Menu & Real-Time Analytics.</p>
             </div>
 
@@ -568,25 +621,43 @@
                     <div class="phone-frame saas-phone">
                         <iframe src="https://bubble-tea-neko-customer.lovable.app" title="Neko Customer App"></iframe>
                     </div>
-                    <div class="phone-label">🐾 Customer Web App</div>
+                    <div class="phone-label">Customer Web App</div>
                 </div>
 
                 <div>
                     <div class="phone-frame saas-phone">
                         <iframe src="https://bubble-tea-neko-barista.lovable.app" title="Neko Barista Scanner"></iframe>
                     </div>
-                    <div class="phone-label">⚡ Barista Terminal</div>
+                    <div class="phone-label">Barista Terminal</div>
                 </div>
             </div>
 
+            <!-- Tutaj kończą się Twoje obecne przyciski Neko -->
             <div class="b2b-actions">
                 <a href="https://bubble-tea-neko-customer.lovable.app" target="_blank" class="btn btn-pink">
-                    🧋 Wypróbuj Demo Klienta
+                    Try the Client Demo
                 </a>
                 <a href="https://bubble-tea-neko-barista.lovable.app" target="_blank" class="btn btn-pink">
-                    🐾 Wypróbuj Demo Baristy
+                    Try the Barista Demo
                 </a>
             </div>
+            <div class="saas-info-box">
+                <div class="saas-info-grid">
+                    <div class="saas-info-item">
+                        <h4>Digital Stamp Card</h4>
+                        <p>Customers earn points directly in their phone's browser—without having to install dedicated apps from the app store.</p>
+                    </div>
+                    <div class="saas-info-item">
+                        <h4>Kawaii Loyalty Program</h4>
+                        <p>Unique, charming loyalty cards (“Paw Stamp Cards”) that boost customer engagement and repeat business.</p>
+                    </div>
+                    <div class="saas-info-item">
+                        <h4>System Live Sync</h4>
+                        <p>Standalone terminal for use with a QR code scanner and live activity preview.</p>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- Koniec karty Neko Bubble Tea -->
         </div>
     </section>
 
