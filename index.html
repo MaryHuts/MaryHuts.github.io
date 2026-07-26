@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MaryHuts — Interactive AI Showcase</title>
+    <!-- Pixel Font dla stylu Arcade -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #0b0d17;
@@ -12,6 +14,7 @@
             --text-secondary: #94a3b8;
             --accent-purple: #a855f7;
             --accent-cyan: #06b6d4;
+            --arcade-neon: #38bdf8;
         }
 
         * {
@@ -31,10 +34,36 @@
                 radial-gradient(circle at 85% 85%, rgba(59, 130, 246, 0.12) 0%, transparent 40%);
         }
 
+        /* --- ARCADE BANNER SECTION --- */
+        .arcade-marquee-container {
+            width: 100%;
+            background: rgba(5, 7, 15, 0.9);
+            border-bottom: 2px solid rgba(56, 189, 248, 0.3);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 0.6rem 0;
+        }
+
+        .arcade-text {
+            display: inline-block;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.8rem;
+            color: var(--arcade-neon);
+            text-shadow: 0 0 8px rgba(56, 189, 248, 0.8), 0 0 15px rgba(168, 85, 247, 0.6);
+            letter-spacing: 2px;
+            animation: marquee 12s linear infinite; /* Szybszy ruch biegnący */
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100vw); }
+            100% { transform: translateX(-100%); }
+        }
+
         /* Hero / Header Section */
         header {
             text-align: center;
-            padding: 2rem 1rem 1rem 1rem;
+            padding: 1.5rem 1rem 1rem 1rem;
         }
 
         header h1 {
@@ -76,7 +105,6 @@
             overflow-x: auto;
             scroll-behavior: smooth;
             padding: 0 2rem 1rem 2rem;
-            /* Ukrycie paska przewijania dla czystego wyglądu */
             scrollbar-width: none; 
             -ms-overflow-style: none;
         }
@@ -88,7 +116,7 @@
         .tool-card {
             flex: 0 0 90vw;
             max-width: 1000px;
-            height: calc(100vh - 220px); /* Idealnie dopasowuje długość do ekranu */
+            height: calc(100vh - 260px);
             min-height: 550px;
             background: var(--card-bg);
             border-radius: 16px;
@@ -110,7 +138,7 @@
             border: none;
         }
 
-        /* Extra Content Section under the Showcase */
+        /* Extra Content Section */
         .next-section {
             max-width: 900px;
             margin: 4rem auto 2rem auto;
@@ -141,27 +169,31 @@
 </head>
 <body>
 
+    <!-- ARCADE MARQUEE BANNER -->
+    <div class="arcade-marquee-container">
+        <div class="arcade-text">
+            🕹️ WELCOME TO THE LAB. CHOOSE A MODULE TO TEST AND EXPERIMENT WITH! 👾
+        </div>
+    </div>
+
     <header>
         <h1>MaryHuts Studio</h1>
         <p>Live Interactive AI Micro-Tools</p>
-        <div class="hint-badge">💡 Hover over any card to pause & test the app</div>
+        <div class="hint-badge">💡 Hover over any module to pause & test</div>
     </header>
 
-    <!-- Auto-Scrolling Reel Container -->
+    <!-- Carousel Container -->
     <section class="showcase-section">
         <div class="carousel-track" id="carouselTrack">
             
-            <!-- Tool 1 -->
             <div class="tool-card">
                 <iframe src="https://text-morph-pal.lovable.app" title="Persona Post AI"></iframe>
             </div>
 
-            <!-- Tool 2 -->
             <div class="tool-card">
                 <iframe src="https://stylemorph-artify.lovable.app" title="StyleMorph AI"></iframe>
             </div>
 
-            <!-- Tool 3 -->
             <div class="tool-card">
                 <iframe src="https://wise-ai-planner.lovable.app" title="SaveWise AI"></iframe>
             </div>
@@ -169,7 +201,6 @@
         </div>
     </section>
 
-    <!-- Next Section (Fast Scroll Down) -->
     <section class="next-section">
         <h2>About The Architecture</h2>
         <p>All micro-apps run on lightweight serverless infrastructure utilizing Cloudflare Workers as a secure gateway to Google's Gemini 3.5 models. Built for instant responsiveness and minimal friction.</p>
@@ -180,31 +211,26 @@
     </footer>
 
     <script>
-    const track = document.getElementById('carouselTrack');
-    let isHovered = false;
-    
-    // ZMIEŃ TĘ WARTOŚĆ: im wyższa liczba, tym szybszy ruch
-    let scrollSpeed = 3.5; 
+        const track = document.getElementById('carouselTrack');
+        let isHovered = false;
+        let scrollSpeed = 3.5; 
 
-    function autoScroll() {
-        if (!isHovered) {
-            track.scrollLeft += scrollSpeed;
-            
-            // Płynny reset na początek po dotarciu do końca
-            if (track.scrollLeft >= (track.scrollWidth - track.clientWidth - 5)) {
-                track.scrollLeft = 0;
+        function autoScroll() {
+            if (!isHovered) {
+                track.scrollLeft += scrollSpeed;
+                
+                if (track.scrollLeft >= (track.scrollWidth - track.clientWidth - 5)) {
+                    track.scrollLeft = 0;
+                }
             }
+            requestAnimationFrame(autoScroll);
         }
-        requestAnimationFrame(autoScroll);
-    }
 
-    // Pauza po najechaniu myszką
-    track.addEventListener('mouseenter', () => { isHovered = true; });
-    track.addEventListener('mouseleave', () => { isHovered = false; });
+        track.addEventListener('mouseenter', () => { isHovered = true; });
+        track.addEventListener('mouseleave', () => { isHovered = false; });
 
-    // Start
-    autoScroll();
-</script>
+        autoScroll();
+    </script>
 
 </body>
 </html>
