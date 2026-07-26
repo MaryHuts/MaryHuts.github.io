@@ -180,30 +180,31 @@
     </footer>
 
     <script>
-        const track = document.getElementById('carouselTrack');
-        let isHovered = false;
-        let scrollSpeed = 1; // Prędkość przesuwania (piksele na krok)
+    const track = document.getElementById('carouselTrack');
+    let isHovered = false;
+    
+    // ZMIEŃ TĘ WARTOŚĆ: im wyższa liczba, tym szybszy ruch
+    let scrollSpeed = 3.5; 
 
-        // Przesuwanie karuzeli w pętli
-        function autoScroll() {
-            if (!isHovered) {
-                track.scrollLeft += scrollSpeed;
-                
-                // Reset na początek po osiągnięciu końca
-                if (track.scrollLeft >= (track.scrollWidth - track.clientWidth - 5)) {
-                    track.scrollLeft = 0;
-                }
+    function autoScroll() {
+        if (!isHovered) {
+            track.scrollLeft += scrollSpeed;
+            
+            // Płynny reset na początek po dotarciu do końca
+            if (track.scrollLeft >= (track.scrollWidth - track.clientWidth - 5)) {
+                track.scrollLeft = 0;
             }
-            requestAnimationFrame(autoScroll);
         }
+        requestAnimationFrame(autoScroll);
+    }
 
-        // Pauza po najechaniu myszką na obszar kart
-        track.addEventListener('mouseenter', () => { isHovered = true; });
-        track.addEventListener('mouseleave', () => { isHovered = false; });
+    // Pauza po najechaniu myszką
+    track.addEventListener('mouseenter', () => { isHovered = true; });
+    track.addEventListener('mouseleave', () => { isHovered = false; });
 
-        // Uruchomienie automatycznego przesuwania
-        autoScroll();
-    </script>
+    // Start
+    autoScroll();
+</script>
 
 </body>
 </html>
