@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MaryHuts — Interactive AI Tools Hub</title>
+    <title>MaryHuts — Interactive AI Showcase</title>
     <style>
         :root {
             --bg-color: #0b0d17;
-            --card-bg: rgba(22, 27, 46, 0.7);
+            --card-bg: rgba(22, 27, 46, 0.85);
             --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
             --accent-purple: #a855f7;
             --accent-cyan: #06b6d4;
-            --accent-pink: #ec4899;
         }
 
         * {
@@ -25,30 +24,26 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-primary);
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1rem;
-            overflow: hidden; /* Zapobiega przewijaniu całej strony */
+            min-height: 100vh;
+            overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 15% 15%, rgba(168, 85, 247, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 85% 85%, rgba(59, 130, 246, 0.15) 0%, transparent 40%);
+                radial-gradient(circle at 15% 15%, rgba(168, 85, 247, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(59, 130, 246, 0.12) 0%, transparent 40%);
         }
 
+        /* Hero / Header Section */
         header {
             text-align: center;
-            max-width: 800px;
-            margin-bottom: 0.8rem;
+            padding: 2rem 1rem 1rem 1rem;
         }
 
         header h1 {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: 800;
             background: linear-gradient(to right, #c084fc, #38bdf8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.3rem;
         }
 
         header p {
@@ -56,74 +51,90 @@
             font-size: 0.95rem;
         }
 
-        /* Nav Tabs - Compact layout */
-        .nav-tabs {
-            display: flex;
-            gap: 0.6rem;
-            margin-bottom: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 0.4rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .tab-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-secondary);
-            padding: 0.5rem 1.2rem;
-            font-size: 0.9rem;
+        .hint-badge {
+            display: inline-block;
+            margin-top: 0.5rem;
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            color: var(--accent-purple);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
             font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
         }
 
-        .tab-btn:hover {
-            color: var(--text-primary);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .tab-btn.active {
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
-        }
-
-        /* App Viewport Container - Full Screen Adaptive */
-        .app-container {
+        /* Horizontal Interactive Showcase Section */
+        .showcase-section {
             width: 100%;
-            max-width: 1200px;
-            flex: 1; /* Wypełnia całą dostępną przestrzeń w pionie */
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 0 2rem 1rem 2rem;
+            /* Ukrycie paska przewijania dla czystego wyglądu */
+            scrollbar-width: none; 
+            -ms-overflow-style: none;
+        }
+
+        .carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tool-card {
+            flex: 0 0 90vw;
+            max-width: 1000px;
+            height: calc(100vh - 220px); /* Idealnie dopasowuje długość do ekranu */
+            min-height: 550px;
             background: var(--card-bg);
             border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(12px);
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            display: flex;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .tool-card:hover {
+            border-color: rgba(168, 85, 247, 0.5);
+            transform: scale(1.01);
         }
 
         iframe {
             width: 100%;
             height: 100%;
             border: none;
-            display: none;
         }
 
-        iframe.active {
-            display: block;
+        /* Extra Content Section under the Showcase */
+        .next-section {
+            max-width: 900px;
+            margin: 4rem auto 2rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+
+        .next-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .next-section p {
+            color: var(--text-secondary);
+            line-height: 1.6;
         }
 
         footer {
-            margin-top: 0.5rem;
+            padding: 2rem;
             color: var(--text-secondary);
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             text-align: center;
         }
     </style>
@@ -132,51 +143,66 @@
 
     <header>
         <h1>MaryHuts Studio</h1>
-        <p>Select a tool below to launch and interact directly on the page.</p>
+        <p>Live Interactive AI Micro-Tools</p>
+        <div class="hint-badge">💡 Hover over any card to pause & test the app</div>
     </header>
 
-    <nav class="nav-tabs">
-        <button class="tab-btn active" onclick="switchApp('postcraft', event)">
-            <span>🎭</span> Persona Post AI
-        </button>
-        <button class="tab-btn" onclick="switchApp('stylemorph', event)">
-            <span>🎨</span> StyleMorph AI
-        </button>
-        <button class="tab-btn" onclick="switchApp('savewise', event)">
-            <span>📈</span> SaveWise AI
-        </button>
-    </nav>
+    <!-- Auto-Scrolling Reel Container -->
+    <section class="showcase-section">
+        <div class="carousel-track" id="carouselTrack">
+            
+            <!-- Tool 1 -->
+            <div class="tool-card">
+                <iframe src="https://text-morph-pal.lovable.app" title="Persona Post AI"></iframe>
+            </div>
 
-    <main class="app-container">
-        <!-- ZAMIEŃ PODANE LINKI NA SWOJE Z LOVABLE -->
-        <iframe id="app-postcraft" class="active" src="https://text-morph-pal.lovable.app" title="Persona Post AI"></iframe>
-        <iframe id="app-stylemorph" src="https://stylemorph-artify.lovable.app" title="StyleMorph AI"></iframe>
-        <iframe id="app-savewise" src="https://wise-ai-planner.lovable.app" title="SaveWise AI"></iframe>
-    </main>
+            <!-- Tool 2 -->
+            <div class="tool-card">
+                <iframe src="https://stylemorph-artify.lovable.app" title="StyleMorph AI"></iframe>
+            </div>
+
+            <!-- Tool 3 -->
+            <div class="tool-card">
+                <iframe src="https://wise-ai-planner.lovable.app" title="SaveWise AI"></iframe>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Next Section (Fast Scroll Down) -->
+    <section class="next-section">
+        <h2>About The Architecture</h2>
+        <p>All micro-apps run on lightweight serverless infrastructure utilizing Cloudflare Workers as a secure gateway to Google's Gemini 3.5 models. Built for instant responsiveness and minimal friction.</p>
+    </section>
 
     <footer>
         <p>&copy; 2026 MaryHuts. Powered by Cloudflare Workers & Google Gemini API.</p>
     </footer>
 
     <script>
-        function switchApp(appId, evt) {
-            document.querySelectorAll('iframe').forEach(iframe => {
-                iframe.classList.remove('active');
-            });
+        const track = document.getElementById('carouselTrack');
+        let isHovered = false;
+        let scrollSpeed = 1; // Prędkość przesuwania (piksele na krok)
 
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-
-            const selectedIframe = document.getElementById('app-' + appId);
-            if (selectedIframe) {
-                selectedIframe.classList.add('active');
+        // Przesuwanie karuzeli w pętli
+        function autoScroll() {
+            if (!isHovered) {
+                track.scrollLeft += scrollSpeed;
+                
+                // Reset na początek po osiągnięciu końca
+                if (track.scrollLeft >= (track.scrollWidth - track.clientWidth - 5)) {
+                    track.scrollLeft = 0;
+                }
             }
-
-            if (evt && evt.currentTarget) {
-                evt.currentTarget.classList.add('active');
-            }
+            requestAnimationFrame(autoScroll);
         }
+
+        // Pauza po najechaniu myszką na obszar kart
+        track.addEventListener('mouseenter', () => { isHovered = true; });
+        track.addEventListener('mouseleave', () => { isHovered = false; });
+
+        // Uruchomienie automatycznego przesuwania
+        autoScroll();
     </script>
 
 </body>
