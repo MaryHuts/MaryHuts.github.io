@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MaryHuts — Interactive AI Tools Portfolio</title>
+    <title>MaryHuts — Interactive AI Tools Hub</title>
     <style>
         :root {
             --bg-color: #0b0d17;
             --card-bg: rgba(22, 27, 46, 0.7);
-            --border-glow: linear-gradient(135deg, #a855f7, #ec4899, #3b82f6);
             --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
+            --accent-purple: #a855f7;
             --accent-cyan: #06b6d4;
             --accent-pink: #ec4899;
         }
@@ -38,7 +38,7 @@
         header {
             text-align: center;
             max-width: 800px;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         header h1 {
@@ -52,90 +52,76 @@
 
         header p {
             color: var(--text-secondary);
-            font-size: 1.1rem;
-            line-height: 1.6;
+            font-size: 1.05rem;
+            line-height: 1.5;
         }
 
-        .badges {
+        /* Navigation Tabs */
+        .nav-tabs {
             display: flex;
-            gap: 0.5rem;
-            justify-content: center;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .badge {
+            gap: 0.8rem;
+            margin-bottom: 2rem;
             background: rgba(255, 255, 255, 0.05);
+            padding: 0.5rem;
+            border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: var(--accent-cyan);
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 0.7rem 1.4rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+        }
+
+        /* App Frame Container */
+        .app-container {
             width: 100%;
             max-width: 1100px;
-        }
-
-        .project-card {
-            position: relative;
             background: var(--card-bg);
             border-radius: 16px;
-            padding: 2rem;
-            backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            backdrop-filter: blur(12px);
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            min-height: 700px;
+            position: relative;
         }
 
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.2);
-            border-color: rgba(168, 85, 247, 0.4);
+        iframe {
+            width: 100%;
+            height: 750px;
+            border: none;
+            display: none;
         }
 
-        .card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-card h2 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin-bottom: 1.5rem;
-        }
-
-        .btn-launch {
-            display: inline-block;
-            text-align: center;
-            background: linear-gradient(135deg, #a855f7, #ec4899);
-            color: #fff;
-            text-decoration: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: opacity 0.2s ease;
-        }
-
-        .btn-launch:hover {
-            opacity: 0.9;
+        iframe.active {
+            display: block;
         }
 
         footer {
-            margin-top: auto;
-            padding-top: 3rem;
+            margin-top: 3rem;
             color: var(--text-secondary);
             font-size: 0.85rem;
             text-align: center;
@@ -146,55 +132,58 @@
 
     <header>
         <h1>MaryHuts Studio</h1>
-        <p>Interaktywne mikronarzędzia Web & AI zbudowane przy użyciu nowoczesnych technologii serwerless, Cloudflare Workers oraz modeli Gemini AI.</p>
-        <div class="badges">
-            <span class="badge">Cloudflare Workers</span>
-            <span class="badge">Gemini 3.5 Flash</span>
-            <span class="badge">React & Tailwind</span>
-            <span class="badge">GitHub Pages</span>
-        </div>
+        <p>Select a tool below to launch and interact with it directly on the page.</p>
     </header>
 
-    <main class="projects-grid">
+    <!-- App Navigation Tabs -->
+    <nav class="nav-tabs">
+        <button class="tab-btn active" onclick="switchApp('postcraft', event)">
+            <span>🎭</span> Persona Post AI
+        </button>
+        <button class="tab-btn" onclick="switchApp('stylemorph', event)">
+            <span>🎨</span> StyleMorph AI
+        </button>
+        <button class="tab-btn" onclick="switchApp('savewise', event)">
+            <span>📈</span> SaveWise AI
+        </button>
+    </nav>
 
-        <!-- Projekt 1 -->
-        <article class="project-card">
-            <div>
-                <div class="card-icon">🎭</div>
-                <h2>Persona Post AI</h2>
-                <p>Generator wpisów do mediów społecznościowych w unikalnych stylach (np. Sassy Cat, Movie Hero, Startup Founder).</p>
-            </div>
-            <!-- Podmień URL w href na link z Lovable / Subdomenę -->
-            <a href="https://text-morph-pal.lovable.app" target="_blank" class="btn-launch">Otwórz aplikację &rarr;</a>
-        </article>
-
-        <!-- Projekt 2 -->
-        <article class="project-card">
-            <div>
-                <div class="card-icon">🎨</div>
-                <h2>StyleMorph AI</h2>
-                <p>Multimodalny edytor stylu zdjęć. Przekształca zdjęcia w styl anime, szkic ołówkiem lub retro komiks.</p>
-            </div>
-            <!-- Podmień URL w href na link z Lovable / Subdomenę -->
-            <a href="https://stylemorph-artify.lovable.app" target="_blank" class="btn-launch">Otwórz aplikację &rarr;</a>
-        </article>
-
-        <!-- Projekt 3 -->
-        <article class="project-card">
-            <div>
-                <div class="card-icon">📈</div>
-                <h2>SaveWise AI</h2>
-                <p>Interaktywny kalkulator budżetowy estymujący koszty życia w miastach na świecie na podstawie stylu życia.</p>
-            </div>
-            <!-- Podmień URL w href na link z Lovable / Subdomenę -->
-            <a href="https://wise-ai-planner.lovable.app" target="_blank" class="btn-launch">Otwórz aplikację &rarr;</a>
-        </article>
-
+    <!-- App Viewport Container -->
+    <main class="app-container">
+        <!-- REPLACE THE SRC URLS WITH YOUR ACTUAL PUBLISHED LOVABLE APP LINKS -->
+        <iframe id="app-postcraft" class="active" src="https://text-morph-pal.lovable.app" title="Persona Post AI"></iframe>
+        <iframe id="app-stylemorph" src="https://stylemorph-artify.lovable.app" title="StyleMorph AI"></iframe>
+        <iframe id="app-savewise" src="https://wise-ai-planner.lovable.app" title="SaveWise AI"></iframe>
     </main>
 
     <footer>
-        <p>&copy; 2026 MaryHuts. Powered by Cloudflare & Google Gemini API.</p>
+        <p>&copy; 2026 MaryHuts. Powered by Cloudflare Workers & Google Gemini API.</p>
     </footer>
+
+    <script>
+        function switchApp(appId, evt) {
+            // Hide all iframes
+            document.querySelectorAll('iframe').forEach(iframe => {
+                iframe.classList.remove('active');
+            });
+
+            // Deactivate all tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected iframe
+            const selectedIframe = document.getElementById('app-' + appId);
+            if (selectedIframe) {
+                selectedIframe.classList.add('active');
+            }
+
+            // Highlight clicked tab button
+            if (evt && evt.currentTarget) {
+                evt.currentTarget.classList.add('active');
+            }
+        }
+    </script>
 
 </body>
 </html>
