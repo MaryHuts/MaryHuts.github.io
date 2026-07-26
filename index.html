@@ -44,7 +44,7 @@
         }
 
         header h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 800;
             background: linear-gradient(to right, #c084fc, #38bdf8);
             -webkit-background-clip: text;
@@ -54,36 +54,41 @@
 
         header p {
             color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-bottom: 0.8rem;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
         }
 
-        /* --- ARCADE BANNER IN HEADER --- */
+        /* --- ARCADE BANNER ON FULL WIDTH --- */
         .arcade-marquee-container {
-            width: 100%;
-            max-width: 800px;
-            background: rgba(5, 7, 15, 0.6);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            border-radius: 8px;
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.15);
+            width: 100vw; /* Pełna szerokość ekranu */
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            background: rgba(5, 7, 15, 0.85);
+            border-top: 1px solid rgba(56, 189, 248, 0.25);
+            border-bottom: 1px solid rgba(56, 189, 248, 0.25);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
             overflow: hidden;
             white-space: nowrap;
-            padding: 0.5rem 0;
-            margin: 0.4rem 0 0.8rem 0;
+            padding: 0.8rem 0;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
         }
 
         .arcade-text {
             display: inline-block;
             font-family: 'Press Start 2P', monospace;
-            font-size: 0.75rem;
+            font-size: 1.8rem; /* Prawie 2.5x większa czcionka */
             color: var(--arcade-neon);
-            text-shadow: 0 0 8px rgba(56, 189, 248, 0.8), 0 0 12px rgba(168, 85, 247, 0.5);
-            letter-spacing: 2px;
-            animation: marquee 10s linear infinite; /* Dynamiczny bieg w lewo */
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.8), 0 0 20px rgba(168, 85, 247, 0.6);
+            letter-spacing: 3px;
+            animation: marquee 22s linear infinite; /* Zwolnione tempo (22 sekundy) */
         }
 
         @keyframes marquee {
-            0% { transform: translateX(100%); }
+            0% { transform: translateX(100vw); }
             100% { transform: translateX(-100%); }
         }
 
@@ -92,9 +97,9 @@
             background: rgba(168, 85, 247, 0.15);
             border: 1px solid rgba(168, 85, 247, 0.3);
             color: var(--accent-purple);
-            padding: 0.3rem 0.8rem;
+            padding: 0.35rem 1rem;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 600;
         }
 
@@ -122,8 +127,8 @@
         .tool-card {
             flex: 0 0 90vw;
             max-width: 1000px;
-            height: calc(100vh - 280px);
-            min-height: 550px;
+            height: calc(100vh - 320px);
+            min-height: 520px;
             background: var(--card-bg);
             border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -178,7 +183,7 @@
         <h1>MaryHuts Studio</h1>
         <p>Live Interactive AI Micro-Tools</p>
         
-        <!-- BIEGNĄCY TEKST ARCADE UMIECZONY TUTAJ -->
+        <!-- BIEGNĄCY TEKST ARCADE NA PEŁNĄ SZEROKOŚĆ EKRANU -->
         <div class="arcade-marquee-container">
             <div class="arcade-text">
                 🕹️ WELCOME TO THE LAB. CHOOSE A MODULE TO TEST AND EXPERIMENT WITH! 👾
@@ -193,15 +198,15 @@
         <div class="carousel-track" id="carouselTrack">
             
             <div class="tool-card">
-                <iframe src="https://persona-post-ai.lovable.app" title="Persona Post AI"></iframe>
+                <iframe src="https://text-morph-pal.lovable.app" title="Persona Post AI"></iframe>
             </div>
 
             <div class="tool-card">
-                <iframe src="https://style-morph-ai.lovable.app" title="StyleMorph AI"></iframe>
+                <iframe src="https://stylemorph-artify.lovable.app" title="StyleMorph AI"></iframe>
             </div>
 
             <div class="tool-card">
-                <iframe src="https://save-wise-ai.lovable.app" title="SaveWise AI"></iframe>
+                <iframe src="https://wise-ai-planner.lovable.app" title="SaveWise AI"></iframe>
             </div>
 
         </div>
