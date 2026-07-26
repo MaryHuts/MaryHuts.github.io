@@ -58,14 +58,9 @@
             margin-bottom: 0.5rem;
         }
 
-        /* --- ARCADE BANNER ON FULL WIDTH --- */
+        /* --- ARCADE BANNER ON FULL WIDTH (POZA HEADEREM) --- */
         .arcade-marquee-container {
-            width: 100vw; /* Pełna szerokość ekranu */
-            position: relative;
-            left: 50%;
-            right: 50%;
-            margin-left: -50vw;
-            margin-right: -50vw;
+            width: 100%;
             background: rgba(5, 7, 15, 0.85);
             border-top: 1px solid rgba(56, 189, 248, 0.25);
             border-bottom: 1px solid rgba(56, 189, 248, 0.25);
@@ -73,23 +68,27 @@
             overflow: hidden;
             white-space: nowrap;
             padding: 0.8rem 0;
-            margin-top: 0.5rem;
-            margin-bottom: 1rem;
+            margin: 0.5rem 0 1.2rem 0;
         }
 
         .arcade-text {
             display: inline-block;
             font-family: 'Press Start 2P', monospace;
-            font-size: 1.8rem; /* Prawie 2.5x większa czcionka */
+            font-size: 1.6rem;
             color: var(--arcade-neon);
             text-shadow: 0 0 10px rgba(56, 189, 248, 0.8), 0 0 20px rgba(168, 85, 247, 0.6);
             letter-spacing: 3px;
-            animation: marquee 22s linear infinite; /* Zwolnione tempo (22 sekundy) */
+            animation: marquee 22s linear infinite;
         }
 
         @keyframes marquee {
             0% { transform: translateX(100vw); }
             100% { transform: translateX(-100%); }
+        }
+
+        .hint-badge-wrapper {
+            text-align: center;
+            margin-bottom: 1rem;
         }
 
         .hint-badge {
@@ -106,7 +105,7 @@
         /* Horizontal Showcase Section */
         .showcase-section {
             width: 100%;
-            padding: 0.8rem 0;
+            padding: 0.5rem 0;
             margin-bottom: 2rem;
         }
 
@@ -182,29 +181,41 @@
     <header>
         <h1>MaryHuts Studio</h1>
         <p>Live Interactive AI Micro-Tools</p>
-        
-        <!-- BIEGNĄCY TEKST ARCADE NA PEŁNĄ SZEROKOŚĆ EKRANU -->
-        <div class="arcade-marquee-container">
-            <div class="arcade-text">
-                🕹️ WELCOME TO THE LAB. CHOOSE A MODULE TO TEST AND EXPERIMENT WITH! 👾
-            </div>
-        </div>
-
-        <div class="hint-badge">💡 Hover over any card to pause & test the app</div>
     </header>
 
-    <!-- Carousel Container -->
+    <!-- PEŁNOEKRANOWY PASEK ARCADE -->
+    <div class="arcade-marquee-container">
+        <div class="arcade-text">
+            🕹️ WELCOME TO THE LAB. CHOOSE A MODULE TO TEST AND EXPERIMENT WITH! 👾
+        </div>
+    </div>
+
+    <div class="hint-badge-wrapper">
+        <div class="hint-badge">💡 Hover over any card to pause & test the app</div>
+    </div>
+
+    <!-- Carousel Container z podwojonymi kartami dla niekończącego się zapętlenia -->
     <section class="showcase-section">
         <div class="carousel-track" id="carouselTrack">
             
+            <!-- Seria 1 -->
             <div class="tool-card">
                 <iframe src="https://text-morph-pal.lovable.app" title="Persona Post AI"></iframe>
             </div>
-
             <div class="tool-card">
                 <iframe src="https://stylemorph-artify.lovable.app" title="StyleMorph AI"></iframe>
             </div>
+            <div class="tool-card">
+                <iframe src="https://wise-ai-planner.lovable.app" title="SaveWise AI"></iframe>
+            </div>
 
+            <!-- Seria 2 (Klon do płynnej pętli bez zacięcia) -->
+            <div class="tool-card">
+                <iframe src="https://text-morph-pal.lovable.app" title="Persona Post AI"></iframe>
+            </div>
+            <div class="tool-card">
+                <iframe src="https://stylemorph-artify.lovable.app" title="StyleMorph AI"></iframe>
+            </div>
             <div class="tool-card">
                 <iframe src="https://wise-ai-planner.lovable.app" title="SaveWise AI"></iframe>
             </div>
@@ -224,13 +235,15 @@
     <script>
         const track = document.getElementById('carouselTrack');
         let isHovered = false;
-        let scrollSpeed = 3.5; 
+        let scrollSpeed = 3; 
 
         function autoScroll() {
             if (!isHovered) {
                 track.scrollLeft += scrollSpeed;
                 
-                if (track.scrollLeft >= (track.scrollWidth - track.clientWidth - 5)) {
+                // Kiedy przejdzie połowę szerokości (pierwszą serię kart), przeskakuje niewidocznie na sam początek
+                const halfWidth = track.scrollWidth / 2;
+                if (track.scrollLeft >= halfWidth) {
                     track.scrollLeft = 0;
                 }
             }
