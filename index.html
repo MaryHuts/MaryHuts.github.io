@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MaryHuts — Interactive AI & Games Showcase</title>
+    <title>MaryHuts — Interactive AI, Games & B2B Solutions Showcase</title>
     <!-- Pixel Font dla stylu Arcade -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
@@ -14,6 +14,8 @@
             --text-secondary: #94a3b8;
             --accent-purple: #a855f7;
             --accent-cyan: #06b6d4;
+            --accent-orange: #f97316;
+            --accent-pink: #ec4899;
             --arcade-neon: #38bdf8;
             --playstore-green: #10b981;
         }
@@ -149,13 +151,7 @@
             border: none;
         }
 
-        /* --- MOBILE PLAYGROUND (GAMES SECTION) --- */
-        .games-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
-        }
-
+        /* --- COMMON SECTION TITLES --- */
         .section-title {
             text-align: center;
             margin-bottom: 3rem;
@@ -172,6 +168,150 @@
         .section-title p {
             color: var(--text-secondary);
             margin-top: 0.5rem;
+        }
+
+        /* --- B2B SAAS SECTION --- */
+        .saas-section {
+            max-width: 1200px;
+            margin: 0 auto 4rem auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .saas-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+            margin-bottom: 3rem;
+        }
+
+        .saas-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .saas-header h3 {
+            font-size: 2rem;
+            color: var(--text-primary);
+        }
+
+        .saas-header p {
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .b2b-demo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .phone-frame {
+            width: 290px;
+            height: 580px;
+            background: #0f121d;
+            border: 12px solid #2d3748;
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 15px rgba(56, 189, 248, 0.2);
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90px;
+            height: 18px;
+            background: #2d3748;
+            border-radius: 10px;
+            z-index: 10;
+        }
+
+        .phone-frame iframe, .phone-frame video {
+            width: 100%;
+            height: 100%;
+            border: none;
+            object-fit: cover;
+        }
+
+        .phone-label {
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-top: 0.8rem;
+            color: var(--accent-cyan);
+        }
+
+        /* Multi Phone Grid for Bubble Tea Showcase */
+        .multi-phone-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            justify-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .small-phone-frame {
+            width: 240px;
+            height: 480px;
+            background: #0f121d;
+            border: 10px solid #2d3748;
+            border-radius: 32px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .small-phone-frame iframe, .small-phone-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: none;
+        }
+
+        .b2b-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .btn-orange {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: white;
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+        }
+
+        .btn-orange:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(249, 115, 22, 0.5);
+        }
+
+        .btn-pink {
+            background: linear-gradient(135deg, #ec4899, #db2777);
+            color: white;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+        }
+
+        .btn-pink:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.5);
+        }
+
+        /* --- MOBILE PLAYGROUND (GAMES SECTION) --- */
+        .games-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
         }
 
         .games-grid {
@@ -196,41 +336,6 @@
             flex-direction: row-reverse;
         }
 
-        /* Phone Frame Rendering */
-        .phone-frame {
-            width: 300px;
-            height: 600px;
-            background: #0f121d;
-            border: 12px solid #2d3748;
-            border-radius: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 15px rgba(56, 189, 248, 0.2);
-            position: relative;
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-
-        /* Notch */
-        .phone-frame::before {
-            content: '';
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90px;
-            height: 18px;
-            background: #2d3748;
-            border-radius: 10px;
-            z-index: 10;
-        }
-
-        .phone-frame iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            padding-top: 30px;
-        }
-
-        /* Game Details Card */
         .game-details {
             max-width: 450px;
         }
@@ -319,7 +424,7 @@
 
     <header>
         <h1>MaryHuts Studio</h1>
-        <p>Live Interactive AI Micro-Tools & Games</p>
+        <p>Live Interactive AI Micro-Tools, B2B SaaS & Games</p>
     </header>
 
     <!-- PEŁNOEKRANOWY PASEK ARCADE -->
@@ -362,6 +467,81 @@
         </div>
     </section>
 
+    <!-- 💼 SAAS / B2B SECTION (CAFE & BUBBLE TEA LOYALTY SYSTEMS) -->
+    <section class="saas-section">
+        <div class="section-title">
+            <h2>☕ Business & Loyalty SaaS Solutions</h2>
+            <p>Complete dual-app loyalty systems for Cafes & Bubble Tea shops (Customer Web-App + Barista Scanner Terminal).</p>
+        </div>
+
+        <!-- System 1: Coffee Go -->
+        <div class="saas-card">
+            <div class="saas-header">
+                <h3>☕ Coffee Go — Cafe Loyalty Ecosystem</h3>
+                <p>Digital stamp card, interactive menu & instant QR scanning for Baristas.</p>
+            </div>
+
+            <div class="b2b-demo-container">
+                <div>
+                    <div class="phone-frame">
+                        <iframe src="https://customer-demo-cafe.lovable.app" title="Coffee Go - Customer App"></iframe>
+                    </div>
+                    <div class="phone-label">📱 Customer Live App</div>
+                </div>
+
+                <div>
+                    <div class="phone-frame">
+                        <iframe src="https://barista-demo-tool.lovable.app" title="Coffee Go - Barista Terminal"></iframe>
+                    </div>
+                    <div class="phone-label">☕ Barista Terminal Live</div>
+                </div>
+            </div>
+
+            <div class="b2b-actions">
+                <a href="https://customer-demo-cafe.lovable.app" target="_blank" class="btn btn-orange">
+                    📱 Wypróbuj Demo Klienta
+                </a>
+                <a href="https://barista-demo-tool.lovable.app" target="_blank" class="btn btn-orange">
+                    ☕ Wypróbuj Demo Baristy
+                </a>
+            </div>
+        </div>
+
+        <!-- System 2: Neko Bubble Tea -->
+        <div class="saas-card">
+            <div class="saas-header">
+                <h3>🧋 Neko Bubble Tea — Kawaii Loyalty & Order App</h3>
+                <p>Full experience with Paw Stamp Cards, QR Generator, Menu & Real-Time Analytics.</p>
+            </div>
+
+            <div class="multi-phone-grid">
+                <div>
+                    <div class="small-phone-frame">
+                        <iframe src="https://bubble-tea-neko-customer.lovable.app" title="Neko Customer App"></iframe>
+                    </div>
+                    <div class="phone-label">🐾 Paw Card & Rewards</div>
+                </div>
+
+                <div>
+                    <div class="small-phone-frame">
+                        <iframe src="https://bubble-tea-neko-barista.lovable.app" title="Neko Barista App"></iframe>
+                    </div>
+                    <div class="phone-label">⚡ Barista Scanner</div>
+                </div>
+            </div>
+
+            <div class="b2b-actions">
+                <a href="https://bubble-tea-neko-customer.lovable.app" target="_blank" class="btn btn-pink">
+                    🧋 Wypróbuj Demo Klienta
+                </a>
+                <a href="https://bubble-tea-neko-barista.lovable.app" target="_blank" class="btn btn-pink">
+                    🐾 Wypróbuj Demo Baristy
+                </a>
+            </div>
+        </div>
+
+    </section>
+
     <!-- 🎮 MOBILE PLAYGROUND SECTION -->
     <section class="games-section">
         <div class="section-title">
@@ -383,7 +563,7 @@
                         <a href="https://aqua-pet-paradise.lovable.app" target="_blank" class="btn btn-web">
                             🌐 Zagraj w przeglądarce
                         </a>
-                        <a href="https://play.google.com/store/apps/details?id=com.mariiahutskalova.aquapet&pcampaignid=web_share" target="_blank" class="btn btn-playstore">
+                        <a href="https://play.google.com" target="_blank" class="btn btn-playstore">
                             🤖 Pobierz z Google Play
                         </a>
                     </div>
@@ -402,7 +582,7 @@
                         <a href="https://stellar-artifact-saga.lovable.app" target="_blank" class="btn btn-web">
                             🌐 Zagraj w przeglądarce
                         </a>
-                        <a href="https://play.google.com/store/apps/details?id=com.hutskalova.spaceadventure&pcampaignid=web_share" target="_blank" class="btn btn-playstore">
+                        <a href="https://play.google.com" target="_blank" class="btn btn-playstore">
                             🤖 Pobierz z Google Play
                         </a>
                     </div>
@@ -421,7 +601,7 @@
                         <a href="https://tachomaster-plan.lovable.app" target="_blank" class="btn btn-web">
                             🌐 Zagraj w przeglądarce
                         </a>
-                        <a href="https://play.google.com/store/apps/details?id=com.hutskalova.tachomaster&pcampaignid=web_share" target="_blank" class="btn btn-playstore">
+                        <a href="https://play.google.com" target="_blank" class="btn btn-playstore">
                             🤖 Pobierz z Google Play
                         </a>
                     </div>
