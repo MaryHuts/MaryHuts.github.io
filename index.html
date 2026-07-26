@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MaryHuts — Interactive AI & Games Showcase</title>
+    <title>MaryHuts — Interactive AI, Games & SaaS Showcase</title>
     <!-- Pixel Font dla stylu Arcade -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
@@ -16,6 +16,8 @@
             --accent-cyan: #06b6d4;
             --arcade-neon: #38bdf8;
             --playstore-green: #10b981;
+            --accent-orange: #f97316;
+            --accent-pink: #ec4899;
         }
 
         * {
@@ -288,6 +290,89 @@
             transform: translateY(-2px);
         }
 
+        /* --- SAAS SOLUTIONS SECTION --- */
+        .saas-section {
+            max-width: 1200px;
+            margin: 4rem auto 0 auto;
+            padding: 2rem 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .saas-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+            margin-bottom: 3rem;
+        }
+
+        .saas-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .saas-header h3 {
+            font-size: 1.9rem;
+            color: var(--text-primary);
+        }
+
+        .saas-header p {
+            color: var(--text-secondary);
+            margin-top: 0.4rem;
+        }
+
+        .b2b-demo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .saas-phone {
+            width: 280px;
+            height: 560px;
+        }
+
+        .phone-label {
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-top: 0.8rem;
+            color: var(--accent-cyan);
+        }
+
+        .b2b-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-orange {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: white;
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+        }
+
+        .btn-orange:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(249, 115, 22, 0.5);
+        }
+
+        .btn-pink {
+            background: linear-gradient(135deg, #ec4899, #db2777);
+            color: white;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+        }
+
+        .btn-pink:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.5);
+        }
+
         @media (max-width: 850px) {
             .game-item, .game-item:nth-child(even) {
                 flex-direction: column;
@@ -428,6 +513,80 @@
                 </div>
             </div>
 
+        </div>
+    </section>
+
+    <!-- 💼 SAAS & B2B SOLUTIONS SECTION (NOWA SEKCJA PONIŻEJ GIER) -->
+    <section class="saas-section">
+        <div class="section-title">
+            <h2>💼 B2B SaaS Ecosystems</h2>
+            <p>Dual-app loyalty solutions for Cafes and Bubble Tea shops (Customer Web App + Barista Scanner Terminal).</p>
+        </div>
+
+        <!-- SaaS Item 1: Coffee Go -->
+        <div class="saas-card">
+            <div class="saas-header">
+                <h3>☕ Coffee Go — Cafe Loyalty Ecosystem</h3>
+                <p>Digital stamp card, interactive menu & instant QR scanning for Baristas.</p>
+            </div>
+
+            <div class="b2b-demo-container">
+                <div>
+                    <div class="phone-frame saas-phone">
+                        <iframe src="https://customer-demo-cafe.lovable.app" title="Coffee Go Customer App"></iframe>
+                    </div>
+                    <div class="phone-label">📱 Customer Web App</div>
+                </div>
+
+                <div>
+                    <div class="phone-frame saas-phone">
+                        <iframe src="https://barista-demo-tool.lovable.app" title="Coffee Go Barista Scanner"></iframe>
+                    </div>
+                    <div class="phone-label">☕ Barista Terminal</div>
+                </div>
+            </div>
+
+            <div class="b2b-actions">
+                <a href="https://customer-demo-cafe.lovable.app" target="_blank" class="btn btn-orange">
+                    📱 Wypróbuj Demo Klienta
+                </a>
+                <a href="https://barista-demo-tool.lovable.app" target="_blank" class="btn btn-orange">
+                    ☕ Wypróbuj Demo Baristy
+                </a>
+            </div>
+        </div>
+
+        <!-- SaaS Item 2: Neko Bubble Tea -->
+        <div class="saas-card">
+            <div class="saas-header">
+                <h3>🧋 Neko Bubble Tea — Kawaii Loyalty & Order App</h3>
+                <p>Full experience with Paw Stamp Cards, QR Generator, Menu & Real-Time Analytics.</p>
+            </div>
+
+            <div class="b2b-demo-container">
+                <div>
+                    <div class="phone-frame saas-phone">
+                        <iframe src="https://bubble-tea-neko-customer.lovable.app" title="Neko Customer App"></iframe>
+                    </div>
+                    <div class="phone-label">🐾 Customer Web App</div>
+                </div>
+
+                <div>
+                    <div class="phone-frame saas-phone">
+                        <iframe src="https://bubble-tea-neko-barista.lovable.app" title="Neko Barista Scanner"></iframe>
+                    </div>
+                    <div class="phone-label">⚡ Barista Terminal</div>
+                </div>
+            </div>
+
+            <div class="b2b-actions">
+                <a href="https://bubble-tea-neko-customer.lovable.app" target="_blank" class="btn btn-pink">
+                    🧋 Wypróbuj Demo Klienta
+                </a>
+                <a href="https://bubble-tea-neko-barista.lovable.app" target="_blank" class="btn btn-pink">
+                    🐾 Wypróbuj Demo Baristy
+                </a>
+            </div>
         </div>
     </section>
 
