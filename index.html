@@ -766,50 +766,51 @@
 
     <script>
     const track = document.getElementById('carouselTrack');
-    const cards = document.querySelectorAll('.tool-card');
-    
-    let isHovered = false;
-    let isInteracting = false; // Nowa zmienna: blokuje płynięcie po kliknięciu
-    let scrollSpeed = 2; 
+const cards = document.querySelectorAll('.tool-card');
 
-    // Automatyczne przewijanie
-    function autoScroll() {
-        if (!isHovered && !isInteracting) {
-            track.scrollLeft += scrollSpeed;
-            
-            const halfWidth = track.scrollWidth / 2;
-            if (track.scrollLeft >= halfWidth) {
-                track.scrollLeft = 0;
-            }
+let isHovered = false;
+let isInteracting = false; // Flaga blokująca ruch po kliknięciu
+let scrollSpeed = 1.5; 
+
+// Automatyczny ruch karuzeli
+function autoScroll() {
+    if (!isHovered && !isInteracting) {
+        track.scrollLeft += scrollSpeed;
+        
+        const halfWidth = track.scrollWidth / 2;
+        if (track.scrollLeft >= halfWidth) {
+            track.scrollLeft = 0;
         }
-        requestAnimationFrame(autoScroll);
     }
+    requestAnimationFrame(autoScroll);
+}
 
-    // Centrowanie karty po kliknięciu
-    cards.forEach(card => {
-        card.addEventListener('click', () => {
-            isInteracting = true; // Zatrzymaj ruch po kliknięciu
-            
-            card.scrollIntoView({
-                behavior: 'smooth',
-                block: 'nearest',
-                inline: 'center' // Wycentruj w poziomie
-            });
+// Obsługa kliknięcia w kartę -> Centrowanie i Pauza
+cards.forEach(card => {
+    card.addEventListener('click', (e) => {
+        isInteracting = true; // Zatrzymujemy ruch
+        
+        // Wycentrowanie karty w poziomie
+        card.scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest',
+            inline: 'center'
         });
     });
+});
 
-    // Wstrzymanie ruchu po najechaniu myszką
-    track.addEventListener('mouseenter', () => { isHovered = true; });
-    track.addEventListener('mouseleave', () => { isHovered = false; });
+// Wstrzymanie ruchu na hover
+track.addEventListener('mouseenter', () => { isHovered = true; });
+track.addEventListener('mouseleave', () => { isHovered = false; });
 
-    // Wznowienie autoscrolla po kliknięciu w tło poza kartami
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.tool-card')) {
-            isInteracting = false;
-        }
-    });
+// Kliknięcie poza kartą wznowi animację
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.tool-card')) {
+        isInteracting = false;
+    }
+});
 
-    autoScroll();
+autoScroll();
     </script>
 
 </body>
