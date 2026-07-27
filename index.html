@@ -210,6 +210,21 @@
             overflow: hidden;
             flex-shrink: 0;
         }
+        /* Styl dla iframe wewnątrz ramki telefonu */
+        .phone-frame iframe {
+            width: 450px;             /* Udajemy większy ekran urządzenia */
+            height: 850px;            /* Proporcjonalna wysokość */
+            border: none;
+    
+        /* 🛠️ MAGIA SCALOWANIA: Zmniejszamy widok do ~80% */
+            transform: scale(0.77);   
+            transform-origin: top left; /* Skalowanie od lewego górnego rogu */
+    
+        /* Pozycja wewnątrz ramki po przeskalowaniu */
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
 
         /* Notch */
         .phone-frame::before {
