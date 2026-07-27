@@ -833,57 +833,61 @@
     autoScroll();
     </script>
 <script>
-    // --- ACCURATE C TERMINAL SIMULATOR FOR MARYHUTS REPO ---
+    // --- ACCURATE & CLEAN C TERMINAL SIMULATOR FOR MARYHUTS REPO ---
     const termOutput = document.getElementById('terminalOutput');
 
-// Dokładne odtworzenie Twojego pliku heart-art.c
-function getHeartASCII(znak = '*') {
-    const z = znak;
-    return `   ${z}${z}     ${z}${z}\n` +
-           `  ${z}${z}${z}${z}${z}   ${z}${z}${z}${z}${z}\n` +
-           ` ${z}${z}${z}${z}${z}${z}${z} ${z}${z}${z}${z}${z}${z}${z}\n` +
-           ` ${z}${z}${z}${z}${z}${z}${z}${z}${z}${z}${z}${z}${z}${z}${z}\n` +
-           `  ${z}${z}${z}${z}${z}${z}${z}${z}${z}${z}${z}${z}${z}\n` +
-           `   ${z}${z}${z}${z}${z}${z}${z}${z}${z}${z}${z}\n` +
-           `    ${z}${z}${z}${z}${z}${z}${z}${z}${z}\n` +
-           `     ${z}${z}${z}${z}${z}${z}${z}\n` +
-           `      ${z}${z}${z}${z}${z}\n` +
-           `       ${z}${z}${z}\n` +
-           `        ${z}\n`;
-}
+    // Clean ASCII Heart (poprawny układ z wyczyszczonymi spacjami ASCII 32)
+    function getHeartASCII(z = '*') {
+        return (
+            `   ${z}${z}     ${z}${z}\n` +
+            `  ${z}${z}${z}${z}${z}   ${z}${z}${z}${z}${z}\n` +
+            ` ${z}${z}${z}${z}${z}${z}${z} ${z}${z}${z}${z}${z}${z}${z}\n` +
+            ` ${z}${z}${z}${z}${z}${z}${z}${z}${z}${z}${z}${z}${z}${z}${z}\n` +
+            `  ${z}${z}${z}${z}${z}${z}${z}${z}${z}${z}${z}${z}${z}\n` +
+            `   ${z}${z}${z}${z}${z}${z}${z}${z}${z}${z}${z}\n` +
+            `    ${z}${z}${z}${z}${z}${z}${z}${z}${z}\n` +
+            `     ${z}${z}${z}${z}${z}${z}${z}\n` +
+            `      ${z}${z}${z}${z}${z}\n` +
+            `       ${z}${z}${z}\n` +
+            `        ${z}\n`
+        );
+    }
 
-    // Dokładne odtworzenie pętli for z Twojego pliku triangle-art.c
-    function getTriangleASCII(znak = '@', wysokosc = 8) {
+    // Algorytm trójkąta (wiersze i kolumny zgodne z triangle-art.c)
+    function getTriangleASCII(z = '@', h = 8) {
         let art = "";
-        for (let i = 1; i <= wysokosc; i++) {
-            let line = " ".repeat(wysokosc - i) + znak.repeat(2 * i - 1);
-            art += line + "\n";
+        for (let i = 1; i <= h; i++) {
+            art += " ".repeat(h - i) + z.repeat(2 * i - 1) + "\n";
         }
         return art;
     }
 
-    function renderTerminalSession() {
-        let content = "";
-        
-        // --- PROGRAM 1: heart-art.c ---
-        content += `<span class="terminal-prompt">user@maryhuts-lab:~/simple-ascii-art$</span> gcc heart-art.c -o heart\n`;
-        content += `<span class="terminal-prompt">user@maryhuts-lab:~/simple-ascii-art$</span> ./heart\n`;
-        content += `<span style="color: #f8fafc;">Wpisz jeden znak (np. *, @, +), ktorym mam narysowac serce: </span><span style="color: #ec4899; font-weight: bold;">*</span>\n`;
-        content += `<span style="color: #f8fafc;">Oto Twoje serce zrobione ze znaku '*':</span>\n\n`;
-        content += `<span style="color: #ec4899;">${getHeartASCII('*')}</span>\n`;
+    // Linijki do wyrenderowania w terminalu
+    const lines = [
+        `<span class="terminal-prompt">user@maryhuts-lab:~/simple-ascii-art$</span> gcc heart-art.c -o heart\n`,
+        `<span class="terminal-prompt">user@maryhuts-lab:~/simple-ascii-art$</span> ./heart\n`,
+        `<span style="color: #f8fafc;">Wpisz jeden znak (np. *, @, +), ktorym mam narysowac serce: </span><span style="color: #ec4899; font-weight: bold;">*</span>\n`,
+        `<span style="color: #f8fafc;">Oto Twoje serce zrobione ze znaku '*':</span>\n\n`,
+        `<span style="color: #ec4899;">${getHeartASCII('*')}</span>\n`,
+        `<span class="terminal-prompt">user@maryhuts-lab:~/simple-ascii-art$</span> gcc triangle-art.c -o triangle\n`,
+        `<span class="terminal-prompt">user@maryhuts-lab:~/simple-ascii-art$</span> ./triangle\n`,
+        `<span style="color: #f8fafc;">Podaj znak do narysowania trojkata: </span><span style="color: #38bdf8; font-weight: bold;">@</span>\n\n`,
+        `<span style="color: #38bdf8;">${getTriangleASCII('@', 8)}</span>\n`,
+        `<span class="terminal-prompt">Process finished with exit code 0.</span> <span class="cursor"></span>`
+    ];
 
-        // --- PROGRAM 2: triangle-art.c ---
-        content += `<span class="terminal-prompt">user@maryhuts-lab:~/simple-ascii-art$</span> gcc triangle-art.c -o triangle\n`;
-        content += `<span class="terminal-prompt">user@maryhuts-lab:~/simple-ascii-art$</span> ./triangle\n`;
-        content += `<span style="color: #f8fafc;">Podaj znak do narysowania trojkata: </span><span style="color: #38bdf8; font-weight: bold;">@</span>\n\n`;
-        content += `<span style="color: #38bdf8;">${getTriangleASCII('@', 8)}</span>\n`;
-
-        content += `<span class="terminal-prompt">Process finished with exit code 0.</span> <span class="cursor"></span>`;
-
-        termOutput.innerHTML = content;
+    // Animowane wprowadzanie linii
+    let index = 0;
+    function typeTerminal() {
+        if (index < lines.length) {
+            termOutput.innerHTML += lines[index];
+            index++;
+            setTimeout(typeTerminal, 120); // Prędkość wypisywania (ms)
+        }
     }
 
-    renderTerminalSession();
+    // Uruchomienie po załadowaniu
+    typeTerminal();
 </script>
 
 </body>
