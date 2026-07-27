@@ -766,58 +766,71 @@
 
     <script>
     const track = document.getElementById('carouselTrack');
-const cards = document.querySelectorAll('.tool-card');
+    const cards = document.querySelectorAll('.tool-card');
 
-let isHovered = false;
-let isInteracting = false; // Flaga blokująca ruch po kliknięciu
-let scrollSpeed = 1.5; 
+    let isHovered = false;
+    let isInteracting = false; 
+    let scrollSpeed = 1.5; 
 
-// Automatyczny ruch karuzeli
-function autoScroll() {
-    if (!isHovered && !isInteracting) {
-        track.scrollLeft += scrollSpeed;
-        
-        const halfWidth = track.scrollWidth / 2;
-        if (track.scrollLeft >= halfWidth) {
-            track.scrollLeft = 0;
+    // Automatyczny ruch karuzeli
+    function autoScroll() {
+        if (!isHovered && !isInteracting) {
+            track.scrollLeft += scrollSpeed;
+            
+            const halfWidth = track.scrollWidth / 2;
+            if (track.scrollLeft >= halfWidth) {
+                track.scrollLeft = 0;
+            }
         }
+        requestAnimationFrame(autoScroll);
     }
-    requestAnimationFrame(autoScroll);
-}
 
-// Obsługa kliknięcia w kartę -> Precyzyjne centrowanie i pauza
-cards.forEach(card => {
-    card.addEventListener('click', (e) => {
-        isInteracting = true; // Zatrzymujemy automatyczny ruch karuzeli
+    // Funkcja centrująca wskazaną kartę
+    function centerCard(card) {
+        isInteracting = true;
         
-        // Obliczamy dokładną pozycję środka karty względem kontenera
         const cardLeft = card.offsetLeft;
         const cardWidth = card.offsetWidth;
         const trackWidth = track.clientWidth;
         
         const targetScrollLeft = cardLeft - (trackWidth / 2) + (cardWidth / 2);
         
-        // Płynne przewinięcie karuzeli na środek
         track.scrollTo({
             left: targetScrollLeft,
             behavior: 'smooth'
         });
-    });
-});
-
-// Wstrzymanie ruchu na hover
-track.addEventListener('mouseenter', () => { isHovered = true; });
-track.addEventListener('mouseleave', () => { isHovered = false; });
-
-// Kliknięcie poza kartą wznowi animację
-document.addEventListener('click', (e) => {
-    if (!e.target.closest('.tool-card')) {
-        isInteracting = false;
     }
-});
 
-autoScroll();
-    </script>
+    // 1. Reagowanie na kliknięcie/dotknięcie w obszarze karty (przed przesłaniem do iframe)
+    cards.forEach(card => {
+        card.addEventListener('pointerdown', () => {
+            centerCard(card);
+        }, true); // 'true' przechwytuje zdarzenie zanim iframe je "połknie"
+    });
+
+    // 2. Gdy użytkownik wejdzie w interakcję bezpośrednio z iframe (skupienie na ramce)
+    window.addEventListener('blur', () => {
+        // Sprawdzamy, która karta zawiera aktywny iframe
+        cards.forEach(card => {
+            if (document.activeElement === card.querySelector('iframe')) {
+                centerCard(card);
+            }
+        });
+    });
+
+    // Wstrzymanie ruchu na hover
+    track.addEventListener('mouseenter', () => { isHovered = true; });
+    track.addEventListener('mouseleave', () => { isHovered = false; });
+
+    // Kliknięcie w puste miejsce na głównej stronie wznawia ruch
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.tool-card')) {
+            isInteracting = false;
+        }
+    });
+
+    autoScroll();
+</script>
 
 </body>
 </html>
