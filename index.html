@@ -785,16 +785,22 @@ function autoScroll() {
     requestAnimationFrame(autoScroll);
 }
 
-// Obsługa kliknięcia w kartę -> Centrowanie i Pauza
+// Obsługa kliknięcia w kartę -> Precyzyjne centrowanie i pauza
 cards.forEach(card => {
     card.addEventListener('click', (e) => {
-        isInteracting = true; // Zatrzymujemy ruch
+        isInteracting = true; // Zatrzymujemy automatyczny ruch karuzeli
         
-        // Wycentrowanie karty w poziomie
-        card.scrollIntoView({
-            behavior: 'smooth',
-            block: 'nearest',
-            inline: 'center'
+        // Obliczamy dokładną pozycję środka karty względem kontenera
+        const cardLeft = card.offsetLeft;
+        const cardWidth = card.offsetWidth;
+        const trackWidth = track.clientWidth;
+        
+        const targetScrollLeft = cardLeft - (trackWidth / 2) + (cardWidth / 2);
+        
+        // Płynne przewinięcie karuzeli na środek
+        track.scrollTo({
+            left: targetScrollLeft,
+            behavior: 'smooth'
         });
     });
 });
